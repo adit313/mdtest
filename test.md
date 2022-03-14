@@ -118,7 +118,7 @@ Through this grant proposal, we aim to provide a well-detailed analysis of the c
 
 ### Overview
 
-- **Total Estimated Duration:** TBD (Estimated 9 Weeks)
+- **Total Estimated Duration:** TBD (Estimated 8 Weeks)
 - **Full-Time Equivalent (FTE):** 2 FTE
 - **Total Costs:** TBD (Estimated 20K USD)
 
