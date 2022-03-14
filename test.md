@@ -114,11 +114,7 @@ Our test blockchain network: https://explorer.stardust.finance/
 
 ## Development Roadmap :nut_and_bolt:
 
-At the end of this grant proposal, we aim to provide both a summary of extant stablecoin solutions and a well defined framework for generating a synthetic stablecoin capable of originating and closing positions.
-
-Our primary deliverable for the former will be summary that breaks down the predominant extant strategies as well as deep-dives into specific coin failures such as Ampleforth, a stablecoin that has fluctuated between $0.30 - $4.00.
-
-Our research deliverable will be a feasible stablecoin architecture that utilizes financial derivatives to underpin a synthetic stablecoin relative to a pegged currency.
+Through this grant proposal, we aim to provide a well-detailed analysis of the current state of industry for stablecoins, extant and historical stablecoin solutions including failures, and a summary of the current view by the US Federal Government. These materials will also be used to gnereate a well defined framework for a derivatives based synthetic stablecoin capable of originating and closing positions.
 
 ### Overview
 
