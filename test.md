@@ -122,9 +122,9 @@ Our research deliverable will be a feasible stablecoin architecture that utilize
 
 ### Overview
 
-- **Total Estimated Duration:** 1 months
+- **Total Estimated Duration:** TBD (Estimated 12 Weeks)
 - **Full-Time Equivalent (FTE):** 2 FTE
-- **Total Costs:** TBD
+- **Total Costs:** TBD (Estimated 20K USD)
 
 ### Milestone 1 — State of the Industry on Stablecoins
 
