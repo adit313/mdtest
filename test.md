@@ -144,7 +144,7 @@ Through this grant proposal, we aim to provide a well-detailed analysis of the c
 | -----: | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |     0. | Rights            | All developed materials will be publicly accessible and public domain.                                                                                                                                                                                                                                                    |
 |  **1.** | Research Goal    | We will provide an overview of the current state of the modern stablecoin ecosystem including a deep-dive into the largest stablecoins by volume.                                                                                                                                                                         |
-| **1a.** | Specific Coverage | Coverage currently planned is for: Angle Labs, Luna, Terra, DAI, Tether, USDC, BinanceUSD, Gemini Dollar, TrueUSD, Pax Dollar, NeutrinoUSD, Tribe, Frax, Liquidity USD, HUSD, XSGD, Reserve Rights, Origin dollar, Facebook's Diem, and Float. However, we may add additional coverage based on any findings in Milestone 1. |
+| **1a.** | Specific Coverage | Coverage is currently planned for: Angle Labs, Luna, Terra, DAI, Tether, USDC, BinanceUSD, Gemini Dollar, TrueUSD, Pax Dollar, NeutrinoUSD, Tribe, Frax, Liquidity USD, HUSD, XSGD, Reserve Rights, Origin dollar, Facebook's Diem, and Float. However, we may add additional coverage based on any findings in Milestone 1. |
 
 ### Milestone 3 — Historical Failed Stablecoins
 
@@ -155,8 +155,8 @@ Through this grant proposal, we aim to provide a well-detailed analysis of the c
 | Number | Deliverable       | Specification                                                                                                                                                                                                          |
 | -----: | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |     0. | Rights            | All developed materials will be publicly accessible and public domain.                                                                                                                                                 |
-|  **1.** | Research Goal    | We will provide an analysis of failed stablecoins and the dynamics that lead to their downfall.                                                                                                                        |
-| **1a.** | Specific Coverage | Coverage currently planned is for: IRON which was tied to TITAN, Fei, Ampleforth, EmptySetDollar, DynamicSetDollar, BasisCash, NuBits. However, we may add additional coverage based on any findings in Milestone 1 or 2. |
+|  **1.** | Research Goal    | We will provide an analysis of failed stablecoins and the dynamics that led to their downfall.                                                                                                                        |
+| **1a.** | Specific Coverage | Coverage is currently planned for: IRON which was tied to TITAN, Fei, Ampleforth, EmptySetDollar, DynamicSetDollar, BasisCash, NuBits. However, we may add additional coverage based on any findings in Milestone 1 or 2. |
 
 ### Milestone 4 — US Government Future Outlook and Past Regulatory Actions
 
