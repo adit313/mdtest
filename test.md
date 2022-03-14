@@ -118,7 +118,7 @@ Through this grant proposal, we aim to provide a well-detailed analysis of the c
 
 ### Overview
 
-- **Total Estimated Duration:** TBD (Estimated 12 Weeks)
+- **Total Estimated Duration:** TBD (Estimated 9 Weeks)
 - **Full-Time Equivalent (FTE):** 2 FTE
 - **Total Costs:** TBD (Estimated 20K USD)
 
@@ -136,7 +136,7 @@ Through this grant proposal, we aim to provide a well-detailed analysis of the c
 
 ### Milestone 2 — Extant Stablecoins
 
-- **Estimated duration:** TBD (Estimated 4 Weeks)
+- **Estimated duration:** TBD (Estimated 3 Weeks)
 - **FTE:** 2
 - **Costs:** TBD (Estimated 7K USD)
 
@@ -148,7 +148,7 @@ Through this grant proposal, we aim to provide a well-detailed analysis of the c
 
 ### Milestone 3 — Historical Failed Stablecoins
 
-- **Estimated duration:** TBD (Estimated 3 Weeks)
+- **Estimated duration:** TBD (Estimated 2 Weeks)
 - **FTE:** 2
 - **Costs:** TBD (Estimated 5K USD)
 
@@ -160,7 +160,7 @@ Through this grant proposal, we aim to provide a well-detailed analysis of the c
 
 ### Milestone 4 — US Government Future Outlook and Past Regulatory Actions
 
-- **Estimated duration:** TBD (Estimated 3 Weeks)
+- **Estimated duration:** TBD (Estimated 2 Weeks)
 - **FTE:** 2
 - **Costs:** TBD (Estimated 5K USD)
 
