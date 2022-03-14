@@ -126,7 +126,7 @@ Through this grant proposal, we aim to provide a well-detailed analysis of the c
 
 - **Estimated duration:** 2 Weeks
 - **FTE:** 2
-- **Costs:** 3k USD
+- **Costs:** 5k USD
 
 | Number | Deliverable                          | Specification                                                                                                                                                                                                                                                                                      |
 | -----: | ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -160,9 +160,9 @@ Through this grant proposal, we aim to provide a well-detailed analysis of the c
 
 ### Milestone 4 — US Government Future Outlook and Past Regulatory Actions
 
-- **Estimated duration:** TBD (Estimated 2 Weeks)
+- **Estimated duration:** TBD (Estimated 1 Week)
 - **FTE:** 2
-- **Costs:** TBD (Estimated 5K USD)
+- **Costs:** TBD (Estimated 3K USD)
 
 | Number | Deliverable       | Specification                                                                                                                                                                                                                                                                                                                        |
 | -----: | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
