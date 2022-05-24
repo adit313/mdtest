@@ -4,64 +4,84 @@
 >
 > See the [Grants Program Process](https://github.com/w3f/Grants-Program/#pencil-process) on how to submit a proposal.
 
-- **Project Name:** Derivative Powered Uncollateralized Stablecoin Research and Design
+- **Project Name:** Algorithmic Stablecoin Design
 - **Team Name:** Stardust Labs Inc.
-- **Payment Address:** 0x19450AB6Db4086155e29d528Fe7d9A693703dD1E (DAI)
-- **[Level](https://github.com/w3f/Grants-Program/tree/master#level_slider-levels):** 1
+- **Payment Address:** 0xF3d5F194D9eF961a85a4d5be05EFda7B2B33005d (DAI, Ethereum Mainet)
+- **[Level](https://github.com/w3f/Grants-Program/tree/master#level_slider-levels):** 2
 
 > ⚠️ _The combination of your GitHub account submitting the application and the payment address above will be your unique identifier during the program. Please keep them safe._
 
 ## Project Overview :page_facing_up:
 
-This proposal is in response to an RFP for an Uncollateralized Stablecoin (Specifically: https://github.com/w3f/Grants-Program/blob/master/rfps/uncollateralized-stablecoin.md).
+This proposal is in response to an RFP for an Algorithmic Uncollateralized Stablecoin (Specifically: https://github.com/w3f/Grants-Program/blob/master/rfps/uncollateralized-stablecoin.md).
 
 ### Overview
 
 - A brief description of your project.
 
-We are proposing a functionally different approach for an uncollateralized stablecoin. Extant uncollateralized stablecoin solutions are based on creating and burning an ERC20-style token. By monitoring exchange rates and managing the token supply, these uncollateralized stablecoins seek to balance supply and demand to peg the exchange rate to a reference currency. To date, none have achieved commercial success and the inherent limitations and flaws of this architecture are quickly becoming apparent even with a theoretically perfect implementation. This paper dives deeper into the current challenges (https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3952045), the first of which is a baseline support level of demand for operational stability which this RFP seeks to address.
+On completion of our deep dive into extant stablecoins and a deep dive into the failure modes of current projects, notably IRON, Terra, Neutrino, Basis Cash, Empty Set Dollar, and others, we've identified the primary challenges and have a design template for a resiliant algorithmically managed stablecoin.
 
-Stardust Labs is proposing a fundamentally different approach that uses financial derivatives to programmatically and algorithmically generate a "synthetic" derivatives-based stablecoin that can be originated or settled on demand.
+In short, the weakness of an algorithmic stablecoin is their inability to manage contractions in demand. This has invariably led to a "death spiral" or a run on the coin that quickly causes hyperinflation, completely collapsing the price of the coin. A key component of any sucessful design will be reversing this incentive and creating a strong incentive to break the "race to the exit" dynamic.
 
-At a high level, the primary focus of stablecoins is risk mitigation. Modern commercially successful architectures derisk by having a centralized entity issue tokens based on physical reserves of the pegged currency held in custody. The primary problem here is trusting the custody of a centralized entity, a particular challenge considering most are cross-border, transnational companies with limited auditing and opaque balance sheets.
+A key component to a successful design is to base the utility of the system on something that has stable, consistent demand. Terra made Luna the native token of their network thinking that would create consistent demand. Unfortunately, Terra never took off as its own network and 75% of all demand was just for Anchor, a single first party app on the network with a subsidized interest rate. This made the demand unstable and resulted in the collapse of the price of Luna and Terra once Anchor demand contracted.
 
-Our proposal is to utilize the latest advancements in decentralized finance to instead originate synthetic financial derivatives on demand. This securitized financial instrument would emulate the stability and utility of a stablecoin without requiring collateral or physical custody. In short, put-call parity allows the algorithmic construction of a synthetic financial instrument from perpetual contracts that effectively locks the value relative to the pegged currency at the risk free rate. By securitizing this construct into a token we can generate a synthetic stablecoin on demand as well as close them on demand as long as a perpetual contract can be accessed and decentralized markets maintain enough liquidity in the perpetual contract market.
+We are proposing an architecture that functions exclusively through open market operations. When the price of the stablecoin exceeds $1 it directly mints and purchases assets to bring the price down to the $1 peg. These newly purchased assets (the seigniorage profits) are sent to a decentralized treasury. The treasury automatically deploys the assets onto the capital markets and uses the interest generated to create a stable, reliable base for the system. Bond coin holders receive excess interest every period in order to compensate them for holding the risk of a depeg event. Stablecoin holders can always convert their tokens to bond coin tokens at parity value. If stablecoin demand contracts, the treasury size also proportionally contracts, freeing up liquidity for these newly minted bond coins.
+
+This is a highly summarized and condensed version of the proposed architecture which we will break down in full in Milestone 1, a design document highlighting the detailed operations of each individual aspect of the network.
+
+Ultimately, this architecture accomplishes five main goals;
+
+First, Improved Stability. as the treasury interest is a reliable, consistent source of revenue it creates a solid level of demand that can serve as a stable base.
+
+Second, Death Spiral Resistant. It breaks the dynamics that create a "death spiral" as exiting the system by burning bond tokens also stops users from receiving future interest payments, concentrating the payments amongst the remaining bond token holders.
+
+Third, Strongly Decentralzied. It replaces centralized control and actions with decentralized open market operations. This tightly couples market forces and the overall function of the network further ensuring resiliancy and removing the need for human intervention.
+
+Fourth, Liquidity Efficient. As assets come into the treasury they are ready to be deployed directly back onto the markets as borrowable assets ensuring that this stablecoin is far more liquidity efficient and creative than extant solutions.
+
+Fifth, Self-Recovering. If the treasury falls below the overall market cap of the stablecoin for any reason, as long as the treasury continues its automatic capital deployments, it will eventually recover due to the fact that capital can always be deployed for a non-zero, positive risk free interest rate, whereas the stablecoin market cap has a 0% interest rate.
+
+A key note is that Treasury funds are not considered collateral. There is no ability to directly redeem stablecoins for treasury assets, instead the process moves through the bond coin first as they are the users that are ultimately absorbing the risk for gain.
 
 - An indication of how your project relates to / integrates into Substrate / Polkadot / Kusama.
 
-What we are proposing is relatively unprecedented but there are promising signs. Angle Labs launched on Ethereum last year as an ERC20 token in order to provide a stablecoin pegged to the Euro. They term themselves "the first decentralized, capital efficient and over-collateralized stablecoin protocol" (https://www.angle.money/). Angle Lab's stablecoin is collateralized with Ethereum and more specifically over-collateralized to ensure safety. In July of 2021 they published a whitepaper indicating that they were going to deploy self-minted perpetual contracts as a tool to bring in additional collateral and protection against large price moves. These perpetuals provide additional outsourcing of risk in addition to directly increasing ETH collateral. 5 months ago, they raised $5M from a16z and others to explore the technology. Our proposed architecture would bring that attention and innovation to the Polkadot network. More importantly for the Polkadot ecosystem, our proposal is decentralized and truly uncollateralized as it manages risks entirely through derivatives, and can generate synthetic stablecoins between any arbitrary pairs provided there is a perpetual contract market with sufficient liquidity.
+A decentalized algorithmically managed stablecoin is considered the holy grail of crypto at the moment. Terra before its demise demonstrated the incredible market demand for a stable, valid project. Launching a successful design would quickly catalize the growth of the Polkadot ecosystem. In addition, the multi-token nature of the treasury, with the ability to borrow tokens from all different parachains is a great utility and well suited to Polkadot's multi-chain architecture.
 
 - An indication of why your team is interested in creating this project.
 
 Stardust Labs is focused on developing foundational advancements in distributed ledgers that improve consumer and user safety. Our overall goal is to build safer, more efficient financial infrastructure for the public. While extant distributed ledger applications have largely solved the use case of peer to peer payments, extant implementations of stablecoins currently have challenges that limit their use or safety.
 
-Stardust Labs is specifically drawn to this RFP as our team has extensive expertise in developing safe and efficient financial products for traditional commercial banks and specific subject matter expertise in decentralized finance and financial engineering. We ultimately believe an uncollateralized, independent stablecoin would have unprecedented utility in the space.
+Stardust Labs is specifically drawn to this RFP as our team has extensive expertise in developing safe and efficient financial products for traditional commercial banks and specific subject matter expertise in decentralized finance and financial engineering. We ultimately believe an uncollateralized, independent stablecoin would have unprecedented utility in the space and with the demise of Terra, there is a clear market opporunity.
+
+Stardust has performed a deep dive into the collapse and utility of stablecoins over the past 2 months and is well positioned to deliver an improved architecture.
 
 ### Project Details
 
-Historically stablecoins have been roughly one of two types. The first are asset-backed tokens controlled by centralized entities that maintain custody of physical assets. These assets could be fiat currencies, a basket of cryptocurrencies, or physical commodities. Examples of this are Tether (USDT), Gemini Dollar (GUSD), and Paxos Gold (PAXG). The second are algorithmically maintained ERC20 tokens that are actively minted or burned based on dex trading exchange rates to maintain parity.
+![Summary Diagram](https://github.com/adit313/StablecoinProposal/blob/main/Stablecoin-Diagram.png?raw=true)
 
-The challenge with the former is that a user is implicitly trusting the centralized entity to maintain those assets with no guarantees. With the latter, it is easy to mint coins during periods of increasing demand, but it is very difficult to burn tokens during periods of decreasing demand.
+Unlike all extant multi-coin algorithmic models, stable coins can no longer be minted by bondcoin holders, (here illustrated as removal of step 0). Instead our smart contract is directly integrated into the network, if the price on the open market for the stablecoin ever exceeds $1, the smart contract mints new tokens and purchases assets with the new tokens increasing supply(Here illustrated as step 1). These new assets are immediately stored in the treasury (Step 2).
 
-Stardust labs recommends a fundamentally different approach. The primary utility of any stablecoin is mitigating the risk of future price movements. The past year has seen strong developments in decentralized financial markets and powerful tools for de-risking in the form of options and perpetual contracts. We can use these products and financial engineering to create a synthetic financial instrument that replicates the performance of a stablecoin on demand. As long as the underlying asset can reach a sufficiently liquid options pair, we can combine products to create a stable structure that ultimately results in a fixed future return in the pegged currency at the risk free rate thanks to put-call parity. If this relationship is broken, that mathematically means that a profitable risk-free arbitrage opportunity exists which should be very short-lived in efficient, open financial markets.
+The treasury is a complex smart contract for automatic, algorithmically driven capital deployment. The Treasury takes in two parameters from the network, a target reserve deployment (ex. 90%) and an excess size (ex. 140%). The Treasury sets and updates its dynamic APR rate automatically to ensure that it is loaning out its target deployment. In this example, if less than 90% of reserves are deployed it will automatically reduce the APR for each token until it hits 90% deployment. If deployment is in excess of 90%, then the smart contract algorithmically, and automatically increases the APR until deployed assets comes down to the 90% ratio. These returns are stored in the treasury until it hits a certain size. Once it exceeds the excess size multiplied by the market cap of the stablecoin, the excess is sent to the interest pool. (Here illustrated as step 4)
 
-Defirate has a good in-depth explanation of both how perpetual contracts work and how they can be hedged to earn the nominal interest at the risk-free funding rate. (https://defirate.com/perpetual-contracts/)
+The interest pool accumulates funds that are not deployed into the market, but are instead staged for deployment to the bond holders. Bond holders can claim a proportion of these stored funds at anytime by burning their tokens for an equivalent % of the total interest pool. I.e (10% of all bond tokens can be burned for 10% of the interest pool). This gives the bond tokens a material non-zero intrinsic value at any given moment. (Illustrated here as Step 5)
 
-Ultimately, our proposed stablecoin isn't a managed token or backed by an underlying asset. Instead, the stablecoin smart contract purchases and returns a tokenized, engineered bundle of options and perpetual contracts that, combined, ensure a stable price relative to the pegged currency in the future. We term this type of asset a 'synthetic' stablecoin, termed because it is the exact same process as building a synthetic option. In addition, this process is similar to securitization whereby several financial products are pooled to yield a purchasable interest-bearing security with a different risk-reward curve.
+Normally however, the interest pool accumulates interest up until a certain point, at which point it makes dividend distribution to the bond token holders. (Step 6)
 
-The astute reader will observe that constructing these synthetic options will incur a cost. However, the advent of flash loans and depository institutions like AAVE allow the capital in the smart contracts to be deployed to generate risk-free interest, allowing the stablecoin contract to offset the cost of purchasing these options. We envision the smart contract assessing either a transaction fee for origination or a penalty for early withdrawals where users have not held the synthetic stablecoin long enough for the interest to offset the contract purchase fees and transaction costs. Though it varies dramatically, Bitcoin futures seem to have a 3.69% risk-free rate (https://quantpedia.com/what-is-the-bitcoins-risk-free-interest-rate/), the risk free rates at Binance for Perpetual contracts (the funding rate) is 0.01% every 8 hours (or an annualized rate of 11.57%). Meanwhile, the fee to enter a perpetual ranges from 0.05%(dxdy) - 0.02% (Binance) so it is likely that these fees would be entirely covered by the interest payments on the overall stabilized value.
+If at anytime the stable coin drops below $1, it can be redeemed at parity value for bond tokens. This is what provides the backing to the stablecoin supply. (Step 7) It is important to note here that because the tokens are burned when redeemed, this shrinks the overall market cap of the stable coins, lowering the effective total required in the treasury, and therefore releasing some funds to the interest pool if the treasury was at capacity.
+
+Not illustrated: The treasury, if it falls below the excess, claws back assets from the interest pool. The treasury has the abiltiy to make uncollateralized, interest free loans from the stablecoin smart contract, which it can then loan out at a fixed interest rate. This functionality is not designed for long-term use, but more as a tool if the system needs to perform an emergency liquidity injection into the market for very short-term demand. (Note this is VERY complex economically and designed to function primarily as a way to control the interest rate of the stablecoin currency, similar to how central banks control overall USD interest rates. Due to its complexity it must be a carefully managed process that is entrusted to the bondholders as it cannot be automated.)
 
 ### Why Now & Risks
 
-Ultimately this is only possible today thanks to both the recent advancements in decentralized finance, and more importantly the liquidity in the market. One of the outstanding risks to this stable coin is if liquidity quickly dries up. An example of the impact of liquidity shocks on securitized financial derivatives is best seen by the 2008 financial crisis. Unlike traditional financial markets however, positions are monitored in real-time and can be forcefully liquidated, preventing direct losses. However, there are fundamental limits on how much stability this construct or any uncollateralized stablecoin could absorb. One of the key outstanding questions, and the main exogenous risk that is currently unknown, is the strength of correlation between overall crypto prices, volatility, and its impact on the liquidity of decentralized financial markets.
+The failure of Terra has opened a gap in the market for an algorithmically managed stablecoin. While over the next few months demand will likely be supressed, in the medium-term, demand will return for a decentralized algo stablecoin much as demand for Terra existed even after the failure of IRON, a token that employed the same model as Terra.
 
-One of the primary anticipated challenges is the lack of regulatory oversight in the markets and the ability of individual companies to offer arbitrary leverage ratios. For example, Binance is offering 125x leverage meaning some perpetual contracts are at risk of being forcibly liquidated even with less than a 1% price movement. (https://bitcoinist.com/binance-125x-leverage-sparks-criticism-from-community/) Our smart contract can simply repurchase another perpetual contract during liquidation, however a risk exists that market liquidity would dry up during periods of unprecedented volatility such as a major market crash. Without liquid markets with leveraged counter-parties willing to absorb the risk, the synthetic stablecoin would be forced to return the money to the user in the underlying currency at the price of the stable peg, having done its job, but at the same time being unable to offer continued stability.
+This specific system was built after careful study of the failure modes of previous solutions and relies on a preestablished liquid financial ecosystem. For example, a large treasury deploying assets requires sophisiticated asset managers looking to borrow a significant amount of capital. Open market operations require DEXs, with significant liquidity and oracles with accurate prices. Keeping a well diversified treasury portfolio to mitigate risk also requires wrapped assets from other chains and bridges to transfer those assets.
 
-Due to the use of options, perpetuals, and lack of human intervention, our proposed system is able to absorb far more volatility than algorithmically managed uncollateralized stablecoins. These implementations have strong negative feedback loops during periods of decreasing demand and, as of date, no robust solution for reducing supply. These struggles have caused many to fail even under benign conditions and these challenges will be dramatically amplified in the type of major market crash where liquidity in financial markets begins to dry up. At that point, the only efficient solution would be custodied collateralized assets by trustworthy centralized entities.
+Conversely these are also risks regarding the liqiudity and functioning of the decentralized financial ecosystem. If decentralized finance was to disappear or become illiquid it would have a material impact on the ability of the treasury to deploy funds. Furthermore, demand for borrowing could dry up and asset values in the treasury could collapse, making the payback period excessively long. Our best prevention plan for this is to ensure the treasury is well diversified in both types of assets and over a significant time duration, i.e. buying into the assets over a long period of time thereby averaging the price peaks and valleys. Furthermore, careful consideration and control of the excess amounts will allow the system to absorb significant risk before requiring a rebuilding period. However, there is a risk that crypto as an entire asset class is either outlawed or completely abandoned.
 
 ### Ecosystem Fit
 
-A decentralized uncollateralized synthetic stablecoin has significant utility for decentralized financial applications and would be a transformative development beyond just the Polkadot ecosystem. In addition to providing a stable store of value that works synergistically with demand in the market, the smart contract mathematics are entirely fungible and can be set up for any arbitrary currency as the underlying asset and pegged currency provided a sufficiently liquid options market exists.
+A decentralized uncollateralized synthetic stablecoin has significant utility for decentralized financial applications and would be a transformative development beyond just the Polkadot ecosystem.
 
 The primary target demographic and audience would be decentralized financial applications and any user who seeks a stable store of value that isn't dependent on a centralized third party, instead risk has been decentrally allocated to the participants on decentralized markets.
 
@@ -107,78 +127,54 @@ Our test blockchain network: https://explorer.stardust.finance/
 
 - link to RFP: https://github.com/w3f/Grants-Program/blob/master/rfps/uncollateralized-stablecoin.md
 
-- academic publications relevant to the problem: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3952045
+- Previous work performed for the Web3 Foundation on Stablecoins: https://github.com/adit313/State-of-the-Stablecoin-Industry
 
-- Information on put-call parity: https://en.wikipedia.org/wiki/Put%E2%80%93call_parity
-  https://www.investopedia.com/terms/p/putcallparity.asp
+- Previous work performed for the Web3 Foundation on Terra's Collapse: https://github.com/adit313/TerraDeepDive
 
 ## Development Roadmap :nut_and_bolt:
 
-Through this grant proposal, we aim to provide a well-detailed analysis of the current state of industry for stablecoins, extant and historical stablecoin solutions including failures, and a summary of the current view by the US Federal Government. These materials will also be used to generate a well-defined framework for a derivatives based synthetic stablecoin capable of originating and closing positions.
+Through this grant proposal, we aim to provide a well-detailed design document that will allow any developer to understand and implement this proposal along with the economic incentives and mathematics that back the proposal. Furthermore for Milestone 2 we will provide a proof of concept of the stablecoin coded in an Ink! Smart Contract on the Polkadot network, or a network of the committee's choosing.
 
 ### Overview
 
-- **Total Estimated Duration:** TBD (Estimated 8 Weeks)
+- **Total Estimated Duration:** 10 Weeks
 - **Full-Time Equivalent (FTE):** 2 FTE
-- **Total Costs:** TBD (Estimated 20K USD)
+- **Total Costs:** 50K
 
-### Milestone 1 — State of the Industry on Stablecoins
+### Milestone 1 — Design Document
 
-- **Estimated duration:** 2 Weeks
+- **Estimated duration:** 3 Weeks
 - **FTE:** 2
-- **Costs:** 5k USD
+- **Costs:** 10k USD
 
-| Number | Deliverable                          | Specification                                                                                                                                                                                                                                                                                      |
-| -----: | ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|     0. | Rights                               | All developed materials will be publicly accessible and public domain.                                                                                                                                                                                                                             |
-|  **1.** | Research Goal    | We will provide an overview of the current state of the modern stablecoin ecosystem including a summary of demand and historical growth over time, industry size and a rough forecast of future growth, the largest existing players, and the main revenue and cost drivers for service providers. |
-| **1a.** | Specific Coverage | Coverage will span [historical and current industry volumes](https://coinmarketcap.com/view/stablecoin/), [academic sources](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3952045), and [recent developments](https://blockworks.co/congressional-action-on-stablecoins-could-come-as-soon-as-this-month-source-says/).                                                                                                          |
+|  Number | Deliverable       | Specification                                                                                                                                                                                                                                                                                                                                                    |
+| ------: | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|      0. | Rights            | All developed materials will be publicly accessible and public domain.                                                                                                                                                                                                                                                                                           |
+|  **1.** | Deliverable       | We will provide a detailed design document that will allow any developer to implement and deploy a stablecoin with our recommended architecture. This document will not only contain the technical details, but also a breakdown of the economic incentives and mathematics that sustain the model.                                                              |
+| **1a.** | Specific Coverage | Deliverable will be a PowerPoint with clear market graphics and charts that outline the following: An overeview of weakness in previous models, a summary of the objectives and design considerations this proposal achieves, overall network and dynamics step-by-step, and a breakdown of the financial mathematics and economics that underpin this proposal. |
 
-### Milestone 2 — Extant Stablecoins
+### Milestone 2 — Proof of Concept
 
-- **Estimated duration:** TBD (Estimated 3 Weeks)
+- **Estimated duration:** 7 Weeks
 - **FTE:** 2
-- **Costs:** TBD (Estimated 7K USD)
+- **Costs:** 40K USD
 
-| Number | Deliverable       | Specification                                                                                                                                                                                                                                                                                                             |
-| -----: | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|     0. | Rights            | All developed materials will be publicly accessible and public domain.                                                                                                                                                                                                                                                    |
-|  **1.** | Research Goal    | We will provide an overview of the current state of the modern stablecoin ecosystem including a deep-dive into the largest stablecoins by volume.                                                                                                                                                                         |
-| **1a.** | Specific Coverage | Coverage is currently planned for: Angle Labs, Luna, Terra, DAI, Tether, USDC, BinanceUSD, Gemini Dollar, TrueUSD, Pax Dollar, NeutrinoUSD, Tribe, Frax, Liquidity USD, HUSD, XSGD, Reserve Rights, Origin dollar, Facebook's Diem, and Float. However, we may add additional coverage based on any findings in Milestone 1. |
-
-### Milestone 3 — Historical Failed Stablecoins
-
-- **Estimated duration:** TBD (Estimated 2 Weeks)
-- **FTE:** 2
-- **Costs:** TBD (Estimated 5K USD)
-
-| Number | Deliverable       | Specification                                                                                                                                                                                                          |
-| -----: | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|     0. | Rights            | All developed materials will be publicly accessible and public domain.                                                                                                                                                 |
-|  **1.** | Research Goal    | We will provide an analysis of failed stablecoins and the dynamics that led to their downfall.                                                                                                                        |
-| **1a.** | Specific Coverage | Coverage is currently planned for: IRON which was tied to TITAN, Fei, Ampleforth, EmptySetDollar, DynamicSetDollar, BasisCash, NuBits. However, we may add additional coverage based on any findings in Milestone 1 or 2. |
-
-### Milestone 4 — US Government Future Outlook and Past Regulatory Actions
-
-- **Estimated duration:** TBD (Estimated 1 Week)
-- **FTE:** 2
-- **Costs:** TBD (Estimated 3K USD)
-
-| Number | Deliverable       | Specification                                                                                                                                                                                                                                                                                                                        |
-| -----: | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|     0. | Rights            | All developed materials will be publicly accessible and public domain.                                                                                                                                                                                                                                                               |
-|  **1.** | Research Goal    | We will provide a summary of the future-looking perspectives and regulatory implications of the published documentation by U.S. Federal entities regarding stablecoins.                                                                                                                                                               |
-| **1a.** | Specific Coverage | [Treasury Report on Stablecoins](https://home.treasury.gov/system/files/136/StableCoinReport_Nov1_508.pdf), [Executive Order on Ensuring Responsible Development of Digital Assets](https://www.whitehouse.gov/briefing-room/presidential-actions/2022/03/09/executive-order-on-ensuring-responsible-development-of-digital-assets/) |
-
-### Milestone 5 — Derivative Backed Stablecoin Architecture
-
-Post research deliverables, we will work with the team to construct next steps as per RFP guidance: "Ideally part of a separate follow-up grant, since it depends on the outcome of the initial research!"
+|  Number | Deliverable                  | Specification                                                                                                                                                                                                                                                                                                             |
+| ------: | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|      0. | Rights                       | All developed materials will be publicly accessible and public domain.                                                                                                                                                                                                                                                    |
+|  **1.** | Bondcoin Smart Contract      | This Ink! Smart Contract will contain the token dynamics for the bondcoin token and the global variables.                                                                                                                                                                                                                 |
+| **1a.** | Specifics                    | Specifically, the hash of account ids and balances, basic ERC20 functions, the ability to initiate a burn to get interest pool assts, and the ability to change global variables.                                                                                                                                         |
+|  **2.** | Stablecoin Smart Contract    | This Ink! Smart Contract will contain the token dynamics for the stablecoin token.                                                                                                                                                                                                                                        |
+| **2a.** | Specifics                    | This Smart Contract will contain the token dynamics for the stablecoin smart contract. Specifically, the hash of account ids and balances, basic ERC20 functions, the ability for users to initiate a burn to get bondcoins at parity value, and the ability to mint new tokens when prices exceed $1 on the open market. |
+|  **3.** | Treasury Smart Contract      | This Ink! Smart Contract will contain the token dynamics for the Treasury.                                                                                                                                                                                                                                                |
+| **3a.** | Specifics                    | By far the most complex of all the smart contracts, this contract will allow users to borrow funds from the treasury pool with an algorithmically managed APR storing interest up to the excess amount and redirecting the rest to the interest pool.                                                                     |
+|  **4.** | Interest Pool Smart Contract | This Ink! Smart Contract will contain the token dynamics for the interest pool.                                                                                                                                                                                                                                           |
+| **4a.** | Specifics                    | This Ink! Smart Contract will hold the pool of tokens in preperation for distribution. It will contain the function to either make divided payments when it is filled to capacity or to to have Bondcoin tokens redeemed for an equivalent % of the stored assets. pool.                                                  |
 
 ## Future Plans
 
-- Our long-term vision is to build an understanding of the stablecoin infrastructure environment and then develop and deploy the first derivative-backed stablecoin and launch it on the Polkadot Network.
+- This proof of concept will be relatively limited in functionality, unaudited, and not ready for commercial or production deployment. It is designed primarily to give the Web3 foundation a feel for the technical aspects and functioning of an algorithmically managed stablecoin and lay the ground work for a full production build.
 
 ## Additional Information :heavy_plus_sign:
 
 **How did you hear about the Grants Program?** Web3 Foundation Website
-
