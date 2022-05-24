@@ -57,7 +57,7 @@ Stardust has performed a deep dive into the collapse and utility of stablecoins 
 
 ### Project Details
 
-![Summary Diagram](https://github.com/adit313/StablecoinProposal/blob/main/Stablecoin-Diagram.png?raw=true)
+![Summary Diagram](https://github.com/adit313/StablecoinProposal/blob/main/StablecoinDiagram.png?raw=true)
 
 Unlike all extant multi-coin algorithmic models, stable coins can no longer be minted by bondcoin holders, (here illustrated as removal of step 0). Instead our smart contract is directly integrated into the network, if the price on the open market for the stablecoin ever exceeds $1, the smart contract mints new tokens and purchases assets with the new tokens increasing supply(Here illustrated as step 1). These new assets are immediately stored in the treasury (Step 2).
 
